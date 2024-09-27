@@ -1,0 +1,157 @@
+/* General Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  display: flex;
+  width: 80%;
+  height: 80vh;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.left-panel {
+  width: 40%;
+  background-color: #0066ff;
+  color: white;
+  padding: 20px;
+}
+
+.right-panel {
+  width: 60%;
+  padding: 20px;
+}
+
+.header h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: 16px;
+}
+
+.order-summary {
+  margin-top: 20px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.item-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.add-instructions-btn {
+  margin-top: 10px;
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.offers-section {
+  margin-top: 20px;
+}
+
+.apply-btn {
+  background-color: white;
+  color: #0066ff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.secured-text {
+  margin-top: 40px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.razorpay-logo {
+  font-weight: bold;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.contact-section p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.logged-in-text {
+  color: gray;
+  font-size: 12px;
+}
+
+.delivery-section {
+  margin-top: 20px;
+}
+
+.address-section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.delivery-type {
+  font-weight: bold;
+}
+
+.add-change-btn {
+  background-color: #0066ff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.continue-btn {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  padding: 15px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
