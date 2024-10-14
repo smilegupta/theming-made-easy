@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { SideBarIllustration } from "../assets/sidebar.jsx";
 import { RazorpayLogo } from "../assets/razorpay.jsx";
 
@@ -43,20 +44,22 @@ const MagicCheckoutModal = ({ isOpen, handleClose }) => {
               </div>
             </div>
 
+            {/* Left Panel */}
             <div className="w-2/3 p-6 rounded-lg bg-white z-10 mr-3 my-3 flex">
               <div className="flex flex-col p-6 m-auto w-[21.45rem] overflow-visible px-0">
-                <h3 className="font-semibold mb-2">Contact details</h3>
-                <div className="space-y-3">
+                <h3 className="relative z-[1] font-heading text-2xl font-semibold text-on-surface">
+                  Contact details
+                </h3>
+                <p className="mt-1 text-base text-on-surface/70">
+                  Enter mobile &amp; email to continue
+                </p>
+                <div className="mt-6 space-y-3.5">
                   <div className="flex items-center space-x-2">
-                    <select className="border border-gray-300 p-2 rounded-md">
-                      <option value="+91">+91</option>
-                      {/* Add more country codes if needed */}
-                    </select>
                     <input
                       type="tel"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
-                      className="border border-gray-300 p-2 rounded-md w-full"
+                      className="w-full rounded-lg border border-surface-900/10 focus:border-on-surface focus:ring-2 focus:ring-on-surface/10 focus-visible:outline-none bg-surface-0 px-4 py-2.5 text-lg text-on-surface-50 border-primary-500 border-opacity-20 placeholder:text-on-surface-50 placeholder:text-opacity-60"
                       placeholder="Mobile number"
                     />
                   </div>
@@ -64,7 +67,7 @@ const MagicCheckoutModal = ({ isOpen, handleClose }) => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="border border-gray-300 p-2 rounded-md w-full"
+                    className="w-full rounded-lg border border-surface-900/10 focus:border-on-surface focus:ring-2 focus:ring-on-surface/10 focus-visible:outline-none bg-surface-0 px-4 py-2.5 text-lg text-on-surface-50 border-primary-500 border-opacity-20 placeholder:text-on-surface-50 placeholder:text-opacity-60"
                     placeholder="Email"
                   />
                 </div>
@@ -75,26 +78,39 @@ const MagicCheckoutModal = ({ isOpen, handleClose }) => {
                     type="checkbox"
                     checked={offersConsent}
                     onChange={(e) => setOffersConsent(e.target.checked)}
-                    className="h-4 w-4 accent-primary-600"
+                    className="h-4 w-5 accent-primary-950"
                   />
-                  <label className="ml-2 text-gray-700 text-sm">
+                  <label className="ml-2 text-md text-on-surface text-opacity-70">
                     Send me offers and order updates
                   </label>
                 </div>
 
                 {/* Continue Button */}
-                <button className="mt-6 w-full bg-primary-600 text-on-primary-600 py-3 rounded-lg text-lg font-semibold">
+                <button className="mt-6 w-full bg-primary-950 text-on-primary-950 py-3 rounded-lg text-lg font-semibold">
                   Continue
                 </button>
               </div>
             </div>
 
+            {/* Shadow Illustration */}
             <div className="pointer-events-none absolute -left-[9.375rem] top-[13rem]  h-[20.5rem] w-[80rem] -rotate-[22.6deg] bg-[hsl(var(--illustration-shadow))] opacity-20 mix-blend-multiply" />
+
+            {/* Close Button */}
+            <div
+              className="absolute top-5 right-7 cursor-pointer z-50 text-md text-on-surface/70"
+              onClick={handleClose}
+            >
+              &#10005;
+            </div>
           </div>
         </div>
       )}
     </>
   );
+};
+MagicCheckoutModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default MagicCheckoutModal;
