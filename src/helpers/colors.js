@@ -1,3 +1,4 @@
+// Helper function: Converts a CSS color to its RGB components.
 export function colorToRGB(color) {
   const d = document.documentElement;
   d.style.outlineColor = color;
@@ -5,14 +6,16 @@ export function colorToRGB(color) {
   return computedColor.match(/[\.\d]+/g);
 }
 
+// Converts a CSS color to HSL format.
 export function color2hsl(color) {
   const rgb = colorToRGB(color);
   if (!rgb) {
     return [];
   }
-  return rgbTohsl(rgb.map(Number));
+  return rgbToHsl(rgb.map(Number));
 }
 
+// Converts HSL to RGB format.
 export function hslToRgb([h, s, l]) {
   h /= 360;
   s /= 100;
@@ -21,9 +24,9 @@ export function hslToRgb([h, s, l]) {
   let r, g, b;
 
   if (s === 0) {
-    r = g = b = l; // achromatic
+    r = g = b = l; // Achromatic case
   } else {
-    const hueTorgb = (p, q, t) => {
+    const hueToRgb = (p, q, t) => {
       if (t < 0) t += 1;
       if (t > 1) t -= 1;
       if (t < 1 / 6) return p + (q - p) * 6 * t;
@@ -35,15 +38,16 @@ export function hslToRgb([h, s, l]) {
     const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
     const p = 2 * l - q;
 
-    r = hueTorgb(p, q, h + 1 / 3);
-    g = hueTorgb(p, q, h);
-    b = hueTorgb(p, q, h - 1 / 3);
+    r = hueToRgb(p, q, h + 1 / 3);
+    g = hueToRgb(p, q, h);
+    b = hueToRgb(p, q, h - 1 / 3);
   }
 
   return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
 
-export function rgbTohsl(rgb) {
+// Converts RGB to HSL format.
+export function rgbToHsl(rgb) {
   let [r, g, b] = rgb;
   r /= 255;
   g /= 255;
@@ -52,13 +56,14 @@ export function rgbTohsl(rgb) {
   const vmax = Math.max(r, g, b);
   const vmin = Math.min(r, g, b);
 
-  const l = (vmax + vmin) * 50;
+  const l = (vmax + vmin) * 50; // Luminance
   if (vmax === vmin) {
-    return [0, 0, l]; // achromatic
+    return [0, 0, l]; // Achromatic case
   }
 
   const d = vmax - vmin;
   const s = 100 * (l > 50 ? d / (2 - vmax - vmin) : d / (vmax + vmin));
+
   let h;
   if (vmax === b) {
     h = (r - g) / d + 4;
@@ -72,8 +77,14 @@ export function rgbTohsl(rgb) {
   return [Math.round(h), Math.round(s), Math.round(l)];
 }
 
+// =============================================
+// Luminance and Contrast Calculation Functions
+// =============================================
+
+// Helper: Linearizes RGB values for luminance calculation.
 const linearize = (val) => (val / 255.0) ** 2.4;
 
+// Helper: Clamps luminance for low-light situations.
 const clampLuminance = (luminance) => {
   const blkThrs = 0.022;
   const blkClmp = 1.414;
@@ -85,6 +96,7 @@ const clampLuminance = (luminance) => {
   return Math.abs(blkThrs - luminance) ** blkClmp + luminance;
 };
 
+// Calculates the relative luminance of an RGB color.
 const getLuminance = ([red, green, blue]) => {
   const y =
     0.2126729 * linearize(red) +
@@ -93,6 +105,7 @@ const getLuminance = ([red, green, blue]) => {
   return clampLuminance(y);
 };
 
+// Calculates the contrast ratio between background and foreground using APCA.
 const getContrast = (background, foreground) => {
   const deltaYmin = 0.0005;
   const scale = 1.14;
@@ -115,6 +128,7 @@ const getContrast = (background, foreground) => {
   return 0.0;
 };
 
+// Adjusts the contrast ratio to account for low contrast.
 const scaleContrast = (contrast) => {
   const loClip = 0.001;
   const loConThresh = 0.035991;
@@ -142,16 +156,23 @@ const scaleContrast = (contrast) => {
   return 0.0;
 };
 
+// Public function: Returns the APCA contrast value between background and foreground.
 export const getAPCAContrast = (background, foreground) => {
   const contrast = getContrast(background, foreground);
   const scaledContrast = scaleContrast(contrast);
   return scaledContrast * 100;
 };
 
+// =============================================
+// Additional HSL Utility Functions
+// =============================================
+
+// Lightens a given HSL color to a specified lightness value.
 export function lightenTo(hsl, to) {
   return [hsl[0], hsl[1], to];
 }
 
+// Returns an HSL color as a formatted string.
 export function hslString(hsl) {
   return `${hsl[0].toFixed()}deg ${hsl[1].toFixed()}% ${hsl[2].toFixed()}%`;
 }

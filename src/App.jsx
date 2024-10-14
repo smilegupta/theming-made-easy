@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import Modal from "./components/Modal.jsx";
-import { createTheme } from "./components/helpers";
+import { createTheme } from "./helpers/theme.js";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);

@@ -8,6 +8,11 @@ import {
 import { inRange, clamp } from "./numbers";
 import flatMap from "./flatMap";
 
+// =============================
+// Tint & Shade Generation Helpers
+// =============================
+
+// Converts tints and shades to HSL strings.
 function stringifyTintAndShades(colors) {
   return Object.keys(colors).reduce((acc, key) => {
     const color = colors[key];
@@ -18,6 +23,7 @@ function stringifyTintAndShades(colors) {
   }, {});
 }
 
+// Converts tints and shades to HSL strings.
 function generateTintAndShades(color, flip = false) {
   let lightValues = [100, 98, 96, 95, 90, 80, 70, 60, 50, 40, 30, 20, 10, 5, 0];
   if (flip) {
@@ -44,21 +50,11 @@ function generateTintAndShades(color, flip = false) {
   };
 }
 
-function getBestContrastTintOrShade(color, lightest, darkest) {
-  const lightContrast = Math.abs(
-    getAPCAContrast(hslToRgb(color), hslToRgb(lightest))
-  );
-  const darkContrast = Math.abs(
-    getAPCAContrast(hslToRgb(color), hslToRgb(darkest))
-  );
-
-  return lightContrast > darkContrast ? lightest : darkest;
-}
-
+// Generates the best contrasting tints and shades.
 function generateOnTintAndShades(colors) {
   return {
     _: getBestContrastTintOrShade(colors._, colors[0], colors[950]),
-    0: getBestContrastTintOrShade(colors[0], colors[0], colors[1000]),
+    0: getBestContrastTintOrShade(colors[0], colors[0], colors[950]),
     10: getBestContrastTintOrShade(colors[10], colors[0], colors[950]),
     25: getBestContrastTintOrShade(colors[25], colors[0], colors[950]),
     50: getBestContrastTintOrShade(colors[50], colors[0], colors[950]),
@@ -72,11 +68,27 @@ function generateOnTintAndShades(colors) {
     800: getBestContrastTintOrShade(colors[800], colors[0], colors[950]),
     900: getBestContrastTintOrShade(colors[900], colors[0], colors[950]),
     950: getBestContrastTintOrShade(colors[950], colors[0], colors[950]),
-    1000: getBestContrastTintOrShade(colors[1000], colors[0], colors[1000]),
+    1000: getBestContrastTintOrShade(colors[1000], colors[0], colors[950]),
   };
 }
 
-export function isColorExtraLight(color) {
+// Selects the tint or shade with the best contrast.
+function getBestContrastTintOrShade(color, lightest, darkest) {
+  const lightContrast = Math.abs(
+    getAPCAContrast(hslToRgb(color), hslToRgb(lightest))
+  );
+  const darkContrast = Math.abs(
+    getAPCAContrast(hslToRgb(color), hslToRgb(darkest))
+  );
+
+  return lightContrast > darkContrast ? lightest : darkest;
+}
+
+// =============================
+// Color Lightness/Darkness Checks
+// =============================
+
+function isColorExtraLight(color) {
   try {
     const themeHsl = color2hsl(color);
     return themeHsl[2] >= 90;
@@ -87,7 +99,7 @@ export function isColorExtraLight(color) {
   return false;
 }
 
-export function isColorExtraDark(color) {
+function isColorExtraDark(color) {
   try {
     const themeHsl = color2hsl(color);
     return themeHsl[2] <= 10;
@@ -97,6 +109,10 @@ export function isColorExtraDark(color) {
 
   return false;
 }
+
+// =============================
+// Helpers for illustrations theming
+// =============================
 
 function bounceBack(value) {
   if (value <= 100) {
@@ -134,6 +150,30 @@ function shouldShowAccentColor(primaryColor) {
     inRange(primaryColor[2], 10, 70);
 
   return darkBlueColor || darkColors || colorMatched;
+}
+
+// =============================
+// Miscellaneous Helpers
+// =============================
+
+function sanitizeColor(color) {
+  return color.replace(/[^\w\.#(),% ]/g, "");
+}
+
+function flatTheme(value, key = "") {
+  return flatMap(Object.keys(value), (key2) => {
+    const combinedKey = key2 === "_" ? key : key ? `${key}-${key2}` : key2;
+    const value2 = value[key2];
+    if (typeof value2 === "string") {
+      return [
+        {
+          name: combinedKey,
+          value: value2,
+        },
+      ];
+    }
+    return flatTheme(value2, combinedKey);
+  });
 }
 
 function buildTheme({ primaryColor, merchantSurfaceColor }) {
@@ -273,26 +313,6 @@ function buildTheme({ primaryColor, merchantSurfaceColor }) {
           ]),
     },
   };
-}
-
-function sanitizeColor(color) {
-  return color.replace(/[^\w\.#(),% ]/g, "");
-}
-
-function flatTheme(value, key = "") {
-  return flatMap(Object.keys(value), (key2) => {
-    const combinedKey = key2 === "_" ? key : key ? `${key}-${key2}` : key2;
-    const value2 = value[key2];
-    if (typeof value2 === "string") {
-      return [
-        {
-          name: combinedKey,
-          value: value2,
-        },
-      ];
-    }
-    return flatTheme(value2, combinedKey);
-  });
 }
 
 export function createTheme({ primaryColor, surfaceColor }) {
