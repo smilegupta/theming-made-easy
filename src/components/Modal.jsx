@@ -45,9 +45,9 @@ const MagicCheckoutModal = ({ isOpen, handleClose }) => {
             </div>
 
             {/* Left Panel */}
-            <div className="w-2/3 p-6 rounded-lg bg-white z-10 mr-3 my-3 flex">
+            <div className="w-2/3 p-6 rounded-lg bg-surface z-10 mr-3 my-3 flex">
               <div className="flex flex-col p-6 m-auto w-[21.45rem] overflow-visible px-0">
-                <h3 className="relative z-[1] font-heading text-2xl font-semibold text-on-surface">
+                <h3 className=" text-2xl font-semibold text-on-surface">
                   Contact details
                 </h3>
                 <p className="mt-1 text-base text-on-surface/70">
