@@ -13,15 +13,6 @@ export function color2hsl(color) {
   return rgbTohsl(rgb.map(Number));
 }
 
-export function color2Hex(color) {
-  const rgb = colorToRGB(color);
-  if (!rgb) {
-    return '';
-  }
-  const rgbArray = rgb.map(Number);
-  return rgbToHex(rgbArray[0], rgbArray[1], rgbArray[2]);
-}
-
 export function hslToRgb([h, s, l]) {
   h /= 360;
   s /= 100;
@@ -80,15 +71,6 @@ export function rgbTohsl(rgb) {
 
   return [Math.round(h), Math.round(s), Math.round(l)];
 }
-
-export const rgbToHex = (r, g, b) =>
-  '#' +
-  [r, g, b]
-    .map((x) => {
-      const hex = x.toString(16);
-      return hex.length === 1 ? '0' + hex : hex;
-    })
-    .join('');
 
 const linearize = (val) => (val / 255.0) ** 2.4;
 
@@ -166,16 +148,8 @@ export const getAPCAContrast = (background, foreground) => {
   return scaledContrast * 100;
 };
 
-export function isValidHexColorCode(color) {
-  return /^#(?:[0-9a-f]{3}){1,2}$/i.test(color);
-}
-
 export function lightenTo(hsl, to) {
   return [hsl[0], hsl[1], to];
-}
-
-export function rgbToString(rgb) {
-  return `rgb(${rgb.join(', ')})`;
 }
 
 export function hslString(hsl) {

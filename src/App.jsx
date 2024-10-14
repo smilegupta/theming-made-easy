@@ -1,51 +1,36 @@
-// App.js or App.tsx
 import { useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-import Modal from "./compoenents/Modal";
-import { createTheme } from "./compoenents/helpers";
+import Modal from "./components/Modal.jsx";
+import { createTheme } from "./components/helpers";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
   return (
-    <HelmetProvider>
-      <Helmet>
-        <style>
-          {createTheme({
-            primaryColor: "#DF742C",
-          })}
-        </style>
-      </Helmet>
-      <div className="App">
-        <div
-          className="text-on-primary-700 p-4"
-          style={{ background: `hsl(var(--illustration-shadow)/ 1)` }}
-        >
-          This is a Tailwind component with dynamic primary color!
-        </div>
+    <div className="App">
+      {/* Injecting dynamic styles */}
+      <HelmetProvider>
+        <Helmet>
+          <style>{createTheme({ primaryColor: "#DF742C" })}</style>
+        </Helmet>
+      </HelmetProvider>
 
-        <button
-          onClick={() => setIsOpen(true)}
-          className="mt-4 mx-2 p-2 bg-gray-800 text-white"
-        >
-          Open Modal
-        </button>
-
-        <svg width="100" height="100">
-          <rect
-            width="100"
-            height="100"
-            fill="hsl(var(--illustration-shadow))"
-          />
-        </svg>
-
-        <Modal isOpen={isOpen} handleClose={handleClose} />
+      {/* Tailwind component with dynamic color */}
+      <div className="text-on-primary-500 bg-primary-500 p-4">
+        This is a Tailwind component with dynamic primary color!
       </div>
-    </HelmetProvider>
+
+      {/* Open Modal Button */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="mt-4 p-2 bg-gray-800 text-white hover:bg-gray-700 transition-colors duration-300"
+      >
+        Open Checkout
+      </button>
+
+      {/* Modal Component */}
+      {isOpen && <Modal isOpen={isOpen} handleClose={() => setIsOpen(false)} />}
+    </div>
   );
 };
 

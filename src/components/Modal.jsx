@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { SideBarIllustration } from "../assets/sidebar";
-import razorpay from "../assets/razorpay.svg";
+import { SideBarIllustration } from "../assets/sidebar.jsx";
+import { RazorpayLogo } from "../assets/razorpay.jsx";
 
 const MagicCheckoutModal = ({ isOpen, handleClose }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -18,36 +18,32 @@ const MagicCheckoutModal = ({ isOpen, handleClose }) => {
                 <div className="flex min-w-0 flex-1 items-center gap-2">
                   <div className="z-[1] flex items-center justify-center overflow-hidden rounded-[25%] border border-on-primary/15 bg-on-primary/5 font-heading text-2xl uppercase text-on-primary h-12 min-h-12 w-12 min-w-12 !border-none">
                     <img
-                      src="https://pbs.twimg.com/profile_images/1271385506505347074/QIc_CCEg_400x400.jpg"
+                      src="https://img.freepik.com/free-vector/hamburger-realistic-isolated_1284-12692.jpg"
                       alt="Razorpay Logo"
                       className="relative z-[1] h-full w-full rounded-[25%] bg-surface object-contain"
                     />
                   </div>
 
                   <div className="max-w-full text-2xl font-semibold text-on-primary truncate">
-                    React India Demo
+                    Snacks Express
                   </div>
                 </div>
               </div>
 
-              <div>
-                <div className="mt-6">
+              <div className="relative">
+                <div className="mt-6 absolute bottom-[28px] left-[78px]">
                   <SideBarIllustration />
                 </div>
 
                 {/* Secured by Razorpay */}
-                <div className="text-xs text-center text-white mt-4 flex">
-                  Secured by
-                  <img
-                    className="h-[18px] w-[5rem] ml-1"
-                    src={razorpay}
-                    alt="Razorpay Logo"
-                  />
+                <div className="text-xs text-center text-on-primary mt-4 items-end flex gap-1 [&_*]:!fill-on-primary">
+                  <span>Secured By</span>
+                  <RazorpayLogo height={"18px"} />
                 </div>
               </div>
             </div>
 
-            <div className="w-2/3 p-6 rounded-lg bg-white z-10 m-3 flex">
+            <div className="w-2/3 p-6 rounded-lg bg-white z-10 mr-3 my-3 flex">
               <div className="flex flex-col p-6 m-auto w-[21.45rem] overflow-visible px-0">
                 <h3 className="font-semibold mb-2">Contact details</h3>
                 <div className="space-y-3">
