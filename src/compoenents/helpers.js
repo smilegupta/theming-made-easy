@@ -185,12 +185,6 @@ function buildTheme({ primaryColor, merchantSurfaceColor }) {
     success: stringifyTintAndShades(successTintAndShades),
     danger: stringifyTintAndShades(dangerTintAndShades),
     warning: stringifyTintAndShades(warningTintAndShades),
-    i: {
-      // icon
-      shadow: hslString([primaryHsl[0], Math.min(primaryHsl[1], 60), 25]),
-      midtone: hslString([primaryHsl[0], Math.min(primaryHsl[1], 60), 50]),
-      highlight: hslString(color2hsl("#fff9e8")),
-    },
 
     illustration: {
       // SHADOWS:

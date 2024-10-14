@@ -16,7 +16,7 @@ const App = () => {
       <Helmet>
         <style>
           {createTheme({
-            primaryColor: "orange",
+            primaryColor: "#DF742C",
           })}
         </style>
       </Helmet>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import sidebar from "../assets/sidebar.svg";
+import { SideBarIllustration } from "../assets/sidebar";
 import razorpay from "../assets/razorpay.svg";
 
 const MagicCheckoutModal = ({ isOpen, handleClose }) => {
@@ -32,7 +32,7 @@ const MagicCheckoutModal = ({ isOpen, handleClose }) => {
 
               <div>
                 <div className="mt-6">
-                  <img src={sidebar} alt="Illustration" className="w-full" />
+                  <SideBarIllustration />
                 </div>
 
                 {/* Secured by Razorpay */}
