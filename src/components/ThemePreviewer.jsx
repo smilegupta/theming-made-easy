@@ -31,9 +31,12 @@ const ThemeColors = ({ isOpen, handleClose }) => {
               {themes.map((theme) => (
                 <React.Fragment key={theme}>
                   <span
-                    className={`inline-block h-8 w-8 border-2 bg-${theme}`}
+                    className={`inline-block h-8 w-8 border-2`}
+                    style={{
+                      backgroundColor: `hsl(var(--${theme}))`,
+                    }}
                   ></span>
-                  <h4 className="font-bold">{theme}</h4>
+                  <h4 className="font-bold text-[black]">{theme}</h4>
                   <div className="mb-8 mt-2 flex w-full [&>*]:flex-1 [&>*]:p-2">
                     {variants.map((variant, idx) => (
                       <div
@@ -62,7 +65,7 @@ const ThemeColors = ({ isOpen, handleClose }) => {
                       backgroundColor: "hsl(var(--illustration-shadow))",
                     }}
                   ></span>
-                  <h4 className="font-bold">Shadow</h4>
+                  <h4 className="font-bold text-[black]">Shadow</h4>
                 </div>
 
                 <div>
@@ -72,7 +75,7 @@ const ThemeColors = ({ isOpen, handleClose }) => {
                       backgroundColor: "hsl(var(--illustration-midtone))",
                     }}
                   ></span>
-                  <h4 className="font-bold">Midtone</h4>
+                  <h4 className="font-bold text-[black]">Midtone</h4>
                 </div>
 
                 <div>
@@ -82,7 +85,7 @@ const ThemeColors = ({ isOpen, handleClose }) => {
                       backgroundColor: "hsl(var(--illustration-highlight))",
                     }}
                   ></span>
-                  <h4 className="font-bold">Highlight</h4>
+                  <h4 className="font-bold text-[black]">Highlight</h4>
                 </div>
 
                 <div>
@@ -92,7 +95,7 @@ const ThemeColors = ({ isOpen, handleClose }) => {
                       backgroundColor: "hsl(var(--illustration-accent))",
                     }}
                   ></span>
-                  <h4 className="font-bold">Accent</h4>
+                  <h4 className="font-bold text-[black]">Accent</h4>
                 </div>
               </div>
             </div>
