@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
-
 import Modal from "./components/Modal.jsx";
 import ThemeColors from "./components/ThemePreviewer.jsx";
 
@@ -11,42 +10,61 @@ const App = () => {
   const [showThemePalette, setShowThemePalette] = useState(false);
 
   return (
-    <div className="App">
+    <div className="App min-h-screen bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white flex flex-col items-center justify-center">
       {/* Injecting dynamic styles */}
       <HelmetProvider>
         <Helmet>
-          <style>{createTheme({ primaryColor: "#DF742C" })}</style>
+          <style>{createTheme({ primaryColor: "#9a58f6" })}</style>
         </Helmet>
       </HelmetProvider>
 
-      {/* Tailwind component with dynamic color */}
-      <div className="text-on-primary-400 bg-primary-400 p-4">
-        This is a Tailwind component with dynamic primary color!
+      {/* Hero Section */}
+      <header className="text-center mb-10">
+        <h1 className="text-5xl font-extrabold mb-4">Welcome to React India</h1>
+        <p className="text-lg font-medium">
+          A demo to show how you can dynamically create a scalable theme in React
+        </p>
+      </header>
+
+      {/* Button Cards Section */}
+      <div className="flex  items-center space-x-8">
+        {/* Open Checkout Modal */}
+        <div className="bg-white w-[250px] p-6 rounded-lg shadow-lg text-center">
+          <h3 className="text-lg font-semibold mb-4 text-gray-900">
+            Checkout Modal
+          </h3>
+          <button
+            onClick={() => setIsOpen(true)}
+            className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500 transition-colors duration-300"
+          >
+            Open Checkout
+          </button>
+        </div>
+
+        {/* Open Theme Palette */}
+        <div className="bg-white w-[250px] p-6 rounded-lg shadow-lg text-center">
+          <h3 className="text-lg font-semibold mb-4 text-gray-900">
+            Theme Palette
+          </h3>
+          <button
+            onClick={() => setShowThemePalette(true)}
+            className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500 transition-colors duration-300"
+          >
+            Open Palette
+          </button>
+        </div>
       </div>
-
-      {/* Open Modal Button */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="mt-4 p-2 bg-gray-800 text-white hover:bg-gray-700 transition-colors duration-300"
-      >
-        Open Checkout
-      </button>
-
-      {/* Open Theme Palette Button */}
-      <button
-        onClick={() => setShowThemePalette(true)}
-        className="mt-4 mx-2 p-2 bg-gray-800 text-white hover:bg-gray-700 transition-colors duration-300"
-      >
-        Open Theme Palette
-      </button>
 
       {/* Modal Component */}
       {isOpen && <Modal isOpen={isOpen} handleClose={() => setIsOpen(false)} />}
 
-      <ThemeColors
-        isOpen={showThemePalette}
-        handleClose={() => setShowThemePalette(false)}
-      />
+      {/* Theme Colors Palette */}
+      {showThemePalette && (
+        <ThemeColors
+          isOpen={showThemePalette}
+          handleClose={() => setShowThemePalette(false)}
+        />
+      )}
     </div>
   );
 };
