@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 const themes = ["surface", "primary", "success", "danger", "warning"];
 const variants = [
-  "0",
   "10",
   "25",
   "50",
@@ -17,7 +16,6 @@ const variants = [
   "800",
   "900",
   "950",
-  "1000",
 ];
 
 const ThemeColors = ({ isOpen, handleClose }) => {
@@ -96,6 +94,19 @@ const ThemeColors = ({ isOpen, handleClose }) => {
                     }}
                   ></span>
                   <h4 className="font-bold text-[black]">Accent</h4>
+                </div>
+              </div>
+
+              <h2 className="mb-4 text-2xl font-bold">CTA Color</h2>
+              <div className="flex gap-4">
+                <div>
+                  <span
+                    className="inline-block h-8 w-8 border-2"
+                    style={{
+                      backgroundColor: "hsl(var(--cta))",
+                    }}
+                  ></span>
+                  <h4 className="font-bold text-[black]">Cta</h4>
                 </div>
               </div>
             </div>

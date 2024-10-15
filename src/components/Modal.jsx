@@ -78,7 +78,7 @@ const MagicCheckoutModal = ({ isOpen, handleClose }) => {
                     type="checkbox"
                     checked={offersConsent}
                     onChange={(e) => setOffersConsent(e.target.checked)}
-                    className="h-4 w-5 accent-primary-500"
+                    className="h-4 w-5 accent-primary-950 "
                   />
                   <label className="ml-2 text-md text-on-surface text-opacity-70">
                     Send me offers and order updates
@@ -86,7 +86,7 @@ const MagicCheckoutModal = ({ isOpen, handleClose }) => {
                 </div>
 
                 {/* Continue Button */}
-                <button className="mt-6 w-full bg-primary-500 text-on-primary-500 py-3 rounded-lg text-lg font-semibold">
+                <button className="mt-6 w-full bg-cta text-on-cta py-3 rounded-lg text-lg font-semibold">
                   Continue
                 </button>
               </div>

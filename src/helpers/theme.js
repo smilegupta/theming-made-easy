@@ -176,21 +176,22 @@ function flatTheme(value, key = "") {
   });
 }
 
-function buildTheme({ primaryColor, merchantSurfaceColor }) {
+function buildTheme({ primaryColor, surfaceColor, ctaColor }) {
   const primaryHsl = color2hsl(primaryColor);
-  const surfaceColor =
-    merchantSurfaceColor || `hsl(${hslString(lightenTo(primaryHsl, 99))})`;
+  const surfaceColorCode =
+    surfaceColor || `hsl(${hslString(lightenTo(primaryHsl, 99))})`;
 
   const successColor = "#009E5C";
   const dangerColor = "#ef4444";
   const warningColor = "#eab308";
 
-  const surfaceHsl = color2hsl(surfaceColor);
+  const surfaceHsl = color2hsl(surfaceColorCode);
   const isSurfaceColorDark = surfaceHsl[2] < 50;
   const surfaceTintAndShades = generateTintAndShades(
     surfaceHsl,
     isSurfaceColorDark
   );
+  const ctaHsl = ctaColor ? color2hsl(ctaColor) : surfaceTintAndShades[950];
 
   // if too close to white, then make the surface color white
   if (surfaceHsl[2] >= 98) {
@@ -219,12 +220,20 @@ function buildTheme({ primaryColor, merchantSurfaceColor }) {
       warning: stringifyTintAndShades(
         generateOnTintAndShades(warningTintAndShades)
       ),
+      cta: hslString(
+        getBestContrastTintOrShade(
+          ctaHsl,
+          color2hsl("#ffffff"),
+          color2hsl("#000000")
+        )
+      ),
     },
     surface: stringifyTintAndShades(surfaceTintAndShades),
     primary: stringifyTintAndShades(primaryTintAndShades),
     success: stringifyTintAndShades(successTintAndShades),
     danger: stringifyTintAndShades(dangerTintAndShades),
     warning: stringifyTintAndShades(warningTintAndShades),
+    cta: hslString(ctaHsl),
 
     illustration: {
       // SHADOWS:
@@ -315,10 +324,11 @@ function buildTheme({ primaryColor, merchantSurfaceColor }) {
   };
 }
 
-export function createTheme({ primaryColor, surfaceColor }) {
+export function createTheme({ primaryColor, surfaceColor, ctaColor }) {
   const colorThemeVars = buildTheme({
     primaryColor,
-    merchantSurfaceColor: surfaceColor,
+    surfaceColor,
+    ctaColor,
   });
   return `:root{${flatTheme(colorThemeVars)
     .map((t) => `--${t.name}: ${sanitizeColor(t.value)};`)
