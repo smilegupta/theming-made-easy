@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async";
+import { ChromePicker } from "react-color";
+
 import Modal from "./components/Modal.jsx";
 import ThemeColors from "./components/ThemePreviewer.jsx";
 
@@ -8,13 +10,19 @@ import { createTheme } from "./helpers/theme.js";
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showThemePalette, setShowThemePalette] = useState(false);
+  const [primaryColor, setPrimaryColor] = useState("#9a58f6"); // State for dynamic primary color
+
+  // Handle color change
+  const handleColorChange = (color) => {
+    setPrimaryColor(color.hex);
+  };
 
   return (
     <div className="App min-h-screen bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-white flex flex-col items-center justify-center">
       {/* Injecting dynamic styles */}
       <HelmetProvider>
         <Helmet>
-          <style>{createTheme({ primaryColor: "#9a58f6" })}</style>
+          <style>{createTheme({ primaryColor })}</style>
         </Helmet>
       </HelmetProvider>
 
@@ -54,6 +62,15 @@ const App = () => {
             Open Palette
           </button>
         </div>
+      </div>
+
+      {/* Color Picker Section */}
+      <div className="mt-10">
+        <h3 className="text-lg font-semibold mb-4">Pick Primary Color</h3>
+        <ChromePicker
+          color={primaryColor}
+          onChangeComplete={handleColorChange}
+        />
       </div>
 
       {/* Modal Component */}
