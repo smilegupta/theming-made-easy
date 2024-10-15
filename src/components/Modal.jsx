@@ -29,6 +29,13 @@ const MagicCheckoutModal = ({ isOpen, handleClose }) => {
                     Snacks Express
                   </div>
                 </div>
+
+                <div className="mt-4 rounded-lg bg-surface-25 text-primary-950">
+                  <div className="py-3 px-4">
+                    <div className="text-base font-medium">Price Summary</div>
+                    <div className="mt-1 text-2xl font-bold">₹200</div>
+                  </div>
+                </div>
               </div>
 
               <div className="relative">
