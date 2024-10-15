@@ -2,6 +2,9 @@
 
 This project demonstrates how to create scalable themes that can adapt seamlessly to any color palette, allowing for customizable and dynamic user experiences.
 
+#### [Video](https://www.youtube.com/watch?v=eRMmvXcCLwU) 
+#### [Playable Demo](theming-made-easy.vercel.app)
+
 ## 📚 Pre-Reads
 
 Before diving into this project, it's helpful to understand some key concepts:
