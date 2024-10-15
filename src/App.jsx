@@ -10,7 +10,7 @@ import { createTheme } from "./helpers/theme.js";
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showThemePalette, setShowThemePalette] = useState(false);
-  const [primaryColor, setPrimaryColor] = useState("#9a58f6"); // State for dynamic primary color
+  const [primaryColor, setPrimaryColor] = useState("#058cff");
 
   // Handle color change
   const handleColorChange = (color) => {

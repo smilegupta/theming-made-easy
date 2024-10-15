@@ -1,3 +1,5 @@
+import plugin from "tailwindcss/plugin";
+
 const themes = ["surface", "primary", "success", "danger", "warning"];
 
 function generateTailwindPalette(color) {
@@ -57,5 +59,10 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addVariant }) {
+      addVariant("extra-light-theme", '[data-theme-extra-light="true"] &');
+      addVariant("extra-dark-theme", '[data-theme-extra-dark="true"] &');
+    }),
+  ],
 };

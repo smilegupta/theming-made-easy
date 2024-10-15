@@ -93,7 +93,7 @@ const MagicCheckoutModal = ({ isOpen, handleClose }) => {
             </div>
 
             {/* Shadow Illustration */}
-            <div className="pointer-events-none absolute -left-[9.375rem] top-[13rem]  h-[20.5rem] w-[80rem] -rotate-[22.6deg] bg-[hsl(var(--illustration-shadow))] opacity-20 mix-blend-multiply" />
+            <div className="pointer-events-none absolute -left-[9.375rem] top-[13rem] h-[20.5rem] w-[80rem] -rotate-[22.6deg] bg-[hsl(var(--illustration-shadow))] opacity-20 mix-blend-multiply extra-light-theme:-rotate-[27deg] extra-light-theme:opacity-40 extra-dark-theme:bg-[hsl(var(--illustration-highlight))] extra-dark-theme:opacity-10 extra-dark-theme:mix-blend-normal" />
 
             {/* Close Button */}
             <div
