@@ -177,10 +177,12 @@ function flatTheme(value, key = "") {
 }
 
 function buildTheme({ primaryColor, surfaceColor, ctaColor }) {
+  // configurable variables
   const primaryHsl = color2hsl(primaryColor);
   const surfaceColorCode =
     surfaceColor || `hsl(${hslString(lightenTo(primaryHsl, 99))})`;
 
+  // fixed variables
   const successColor = "#009E5C";
   const dangerColor = "#ef4444";
   const warningColor = "#eab308";
@@ -191,12 +193,13 @@ function buildTheme({ primaryColor, surfaceColor, ctaColor }) {
     surfaceHsl,
     isSurfaceColorDark
   );
-  const ctaHsl = ctaColor ? color2hsl(ctaColor) : surfaceTintAndShades[950];
 
   // if too close to white, then make the surface color white
   if (surfaceHsl[2] >= 98) {
     surfaceTintAndShades._ = lightenTo(surfaceHsl, 100);
   }
+
+  const ctaHsl = ctaColor ? color2hsl(ctaColor) : surfaceTintAndShades[950];
 
   const primaryTintAndShades = generateTintAndShades(primaryHsl);
   const successTintAndShades = generateTintAndShades(color2hsl(successColor));
