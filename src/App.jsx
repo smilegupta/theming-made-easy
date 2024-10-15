@@ -22,7 +22,11 @@ const App = () => {
       {/* Injecting dynamic styles */}
       <HelmetProvider>
         <Helmet>
-          <style>{createTheme({ primaryColor })}</style>
+          <style>
+            {createTheme({
+              primaryColor,
+            })}
+          </style>
         </Helmet>
       </HelmetProvider>
 
