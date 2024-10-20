@@ -32,7 +32,7 @@ const App = () => {
 
       {/* Hero Section */}
       <header className="text-center mb-10">
-        <h1 className="text-5xl font-extrabold mb-4">Welcome to React India</h1>
+        <h1 className="text-5xl font-extrabold mb-4">Color Theming Made Easy</h1>
         <p className="text-lg font-medium">
           A demo to show how you can dynamically create a scalable theme in
           React
